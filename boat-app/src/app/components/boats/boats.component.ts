@@ -23,7 +23,7 @@ export class BoatsComponent implements OnInit {
   }
 
   ngOnInit() {
-    //console.log('Boats ngOnInit loaded...');
+
   }
 
   postBoatToBackend(boat:any) {

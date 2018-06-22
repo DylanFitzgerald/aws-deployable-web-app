@@ -26,14 +26,13 @@ con.connect(function(err) {
 
     con.query('USE boats', function (err, result) {
         if (err) throw err;
-        console.log("USING database: boats");
+        console.log("USING DATABASE: boats");
     });
 
-    var sql = "CREATE TABLE IF NOT EXISTS boats.ships (ship_id INT NOT NULL AUTO_INCREMENT, shipName VARCHAR(50), shipType VARCHAR(50), PRIMARY KEY ( ship_id ));";
+    var sql = "CREATE TABLE IF NOT EXISTS boats.ships (ship_id INT NOT NULL AUTO_INCREMENT, shipName VARCHAR(200), shipType VARCHAR(200), PRIMARY KEY ( ship_id ));";
     con.query(sql, 
         function(err, result) {
             if (err) throw err;
-            console.log('Ships table created')
     });
 });
 
@@ -73,13 +72,13 @@ app.use(bodyParser.json());
 //post to database
 app.route('/api/boats').post((req, res) => {
 
-    con.query('USE boats', function (err, result) {
-        if (err) throw err;
-        console.log("Posted to database: boats ");
-    });
-
     var shipName = req['body']['shipName'];
     var shipType = req['body']['shipType'];
+
+    con.query('USE boats', function (err, result) {
+        if (err) throw err;
+        console.log('Posted \"' + shipName  + '\" to database: boats');
+    });
 
     con.query('INSERT INTO ships (shipName, shipType) VALUES (\"' + shipName  + '\", \"' + shipType  + '\")', function (err, result) {
         if (err) throw err;
