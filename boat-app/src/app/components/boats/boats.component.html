@@ -1,0 +1,47 @@
+<h2>Get</h2>
+<div class="container">
+<table class="table">
+  <thead>
+    <tr>
+      <th>Boat Name</th>
+      <th>Boat Type</th>
+      <th>Boat Id</th>
+      <th>Delete Boat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let boat of boats" style="background-color: #f1f1f1;">
+      <td>{{boat.shipName}}</td>
+      <td>{{boat.shipType}}</td>
+      <td>{{boat.ship_id}}</td>
+      <td><button (click)="deleteBoatBasedOnId(boat.ship_id)">X</button></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2>Post</h2>
+<div class="container">
+  <form>
+    <div>
+      <label for="shipName">Name: </label><br>
+      <input class="form-control" type="text" #shipName>
+    </div>
+    <div>
+      <label for="shipType">Type: </label><br>
+      <input class="form-control" type="text" #shipType>
+    </div>
+  </form>
+  <button class="btn btn-margin" (click)="postNewBoat(shipName.value, shipType.value)">Post new boat</button>
+</div>
+
+<h2>Delete</h2>
+<div class="container">
+  <form>
+    <div>
+      <label for="shipId">Id to Delete: </label><br>
+      <input class="form-control" type="text" #shipId>
+    </div>
+  </form>
+  <button class="btn btn-margin" (click)="deleteBoatBasedOnId(shipId.value)">Delete Boat</button>
+</div>
