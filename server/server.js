@@ -20,8 +20,6 @@ var con = mysql.createConnection({
     database: "boats"
 });
 
-
-
 con.connect(function(err) {
     if (err) throw err;
     console.log("Connected!");

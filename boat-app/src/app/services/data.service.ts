@@ -18,17 +18,17 @@ export class DataService {
   }
 
   getAllBoats() {
-    return this.http.get('http://localhost:8000/api/boats')
+    return this.http.get('http://34.201.45.223:8000/api/boats')
     .pipe(map(res => res.json()));
   }
 
   postNewBoat(boat:any) {
-    return this.http.post('http://localhost:8000/api/boats', boat)
+    return this.http.post('http://34.201.45.223:8000/api/boats', boat)
     .pipe(map(res => res.json()));
   }
 
   deleteBoat(id:any) {
-    return this.http.delete('http://localhost:8000/api/boats/' + id)
+    return this.http.delete('http://34.201.45.223:8000/api/boats/' + id)
     .pipe(map(res => res.json()));;
   }
 }
