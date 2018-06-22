@@ -1,0 +1,26 @@
+version: '2' # specify docker-compose version
+
+# Define the services/containers to be run
+services:
+  angular: # name of the first service
+    build: boat-app # specify the directory of the Dockerfile
+    ports:
+      - "4200:4200" # specify port forewarding
+
+  express: #name of the second service
+    build: server # specify the directory of the Dockerfile
+    ports:
+      - "8000:8000" #specify ports forewarding
+    links:
+      - database #link this service to the database
+
+  database: # name of the third service
+    image: mysql:latest # specify image to build container from
+    ports:
+      - "3306:3306" # specify port forewarding
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: boats
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      
