@@ -15,7 +15,7 @@ services:
       - database #link this service to the database
 
   database: # name of the third service
-    image: mysql:latest # specify image to build container from
+    image: mysql:5 # specify image to build container from
     ports:
       - "3306:3306" # specify port forewarding
     environment:

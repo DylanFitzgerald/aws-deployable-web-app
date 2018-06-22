@@ -15,11 +15,29 @@ app.use(cors());
 const mysql = require('mysql');
 var con = mysql.createConnection({
     host: "database",
-    user: "root",
+    user: "user",
     password: "password",
     database: "boats"
 });
 
+
+
+con.connect(function(err) {
+    if (err) throw err;
+    console.log("Connected!");
+
+    con.query('USE boats', function (err, result) {
+        if (err) throw err;
+        console.log("USING database: boats");
+    });
+
+    var sql = "CREATE TABLE IF NOT EXISTS boats.ships (ship_id INT NOT NULL AUTO_INCREMENT, shipName VARCHAR(50), shipType VARCHAR(50), PRIMARY KEY ( ship_id ));";
+    con.query(sql, 
+        function(err, result) {
+            if (err) throw err;
+            console.log('Ships table created')
+    });
+});
 
 app.listen(port, () => {
     console.log('Listening on port: ' + port);
@@ -32,11 +50,6 @@ app.route('/').get((req, res) => {
 
 //get from database
 app.route('/api/boats').get((req, res) => {
-    con.query('USE boats', function (err, result) {
-        if (err) throw err;
-        console.log("Requesed from database: boats ");
-    });
-
     con.query("SELECT * FROM ships", function (err, result) {
         if (err) throw err;
         res.send(
@@ -50,7 +63,7 @@ app.route('/api/boats/:ship_id').delete((req, res) => {
 
     con.query('DELETE FROM ships WHERE ship_id = \"' + id  + '\"', function(err, result) {
         if (err) throw err;
-        console.log('Deleted item' + id);
+        console.log('Deleted ship with id number ' + id);
     });
     res.send('Deleted item');
 });
